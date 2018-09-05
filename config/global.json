@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "id": "p_iqiyihao",
+      "pro_name": "爱奇艺号",
+      "pro_desc": "爱奇艺号",
+      "case_suits":[
+        {
+          "suit_id": "p_iqiyihao_home",
+          "name": "首页",
+          "desc": "爱奇艺号首页相关需求"
+        },{
+          "suit_id": "p_iqiyihao_video",
+          "name": "视频",
+          "desc": "爱奇艺号视频相关需求"
+        },{
+          "suit_id": "p_iqiyihao_轻小说",
+          "name": "轻小说",
+          "desc": "爱奇艺号轻小说相关需求"
+        }
+      ]
+    }
+  ],
+  "methods":[
+    {
+      "id": "m_public",
+      "method_name": "公共方法",
+      "pro_desc": "所有项目都适用的公共方法",
+      "method_suits":[
+        {
+          "module_id": "m_public_string",
+          "module_name": "字符串处理",
+          "module_desc": "字符串处理"
+        },{
+          "module_id": "m_public_mysql",
+          "module_name": "数据库处理",
+          "desc": "数据库处理"
+        },{
+          "module_id": "m_public_log",
+          "module_name": "日志处理",
+          "desc": "日志处理"
+        }
+      ]
+    }
+  ]
+}

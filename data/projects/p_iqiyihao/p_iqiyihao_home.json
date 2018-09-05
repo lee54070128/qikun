@@ -1,0 +1,224 @@
+{
+  "author": "\u674e\u8fde\u5f3a",
+  "steps": [
+    {
+      "before_script": true,
+      "script": {
+        "before_test": {
+          "input": {
+            "lsession": "${lsession}",
+            "project_name": "feige"
+          },
+          "output": "lsession",
+          "func": "sso_login",
+          "package": "lib.login"
+        },
+        "after_test": null
+      },
+      "output_var": null,
+      "request": {
+        "cookies": "",
+        "url": "message-platform/api/v1/user/bizlines?currentPage=0&pageSize=100&menu=M_RECEIVER",
+        "request_type": "GET",
+        "host": "${feige_host}",
+        "params": "",
+        "content_type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "after_script": false,
+      "input": {
+        "feige_host": "http://test.feige.qiyi.domain:8080"
+      },
+      "step_id": "get_all_bizline",
+      "result_check": [
+        "code,EQ,'A00000'",
+        "data,NE,null",
+        "data[*].bizLineId,EXIST,STRING=TEST_BIZ"
+      ],
+      "step_desc": "\u83b7\u53d6\u6240\u6709\u7684\u4e1a\u52a1\u7ebf"
+    },
+    {
+      "before_script": true,
+      "script": {
+        "before_test": {
+          "input": {
+            "text": "\u6d4b\u8bd5_\u5168\u90e8\u767b\u9646"
+          },
+          "output": "biz_name",
+          "func": "random_name",
+          "package": "util.commonUtil"
+        },
+        "after_test": null
+      },
+      "output_var": null,
+      "request": {
+        "cookies": "",
+        "url": "message-platform/api/v1/receivergroups/checkName?groupName=${biz_name}",
+        "request_type": "GET",
+        "host": "${feige_host}",
+        "params": "",
+        "content_type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "after_script": false,
+      "input": {
+        "feige_host": "http://test.feige.qiyi.domain:8080"
+      },
+      "step_id": "check_receiver_group_name",
+      "result_check": [
+        "code,EQ,'A00000'",
+        "data,NE,null",
+        "data.duplicate,EQ,FALSE"
+      ],
+      "step_desc": "\u5224\u65ad\u4eba\u7fa4\u540d\u79f0\u662f\u5426\u91cd\u590d"
+    },
+    {
+      "before_script": false,
+      "script": null,
+      "output_var": null,
+      "request": {
+        "cookies": "",
+        "url": "message-platform/api/v1/receivergroups/save/TEST_BIZ",
+        "request_type": "POST",
+        "host": "${feige_host}",
+        "params": "{\"name\":\"${biz_name}\",\"groupStatus\":0,\"createType\":\"CONDITION_FILTER\",\"filterType\":\"ACCOUNT\",\"accountType\":\"PORTRAIT\",\"allDevices\":false,\"allAuthUsers\":false,\"allLoginUsers\":true,\"bizAuthType\":\"\",\"bizLineCode\":\"TEST_BIZ\",\"uidFileUrl\":\"\",\"bizAuthReceivers\":[],\"portrait\":\"{}\",\"uids\":[]}",
+        "content_type": "application/json;charset=UTF-8"
+      },
+      "after_script": false,
+      "input": {
+        "feige_host": "http://test.feige.qiyi.domain:8080"
+      },
+      "step_id": "create_new_login_bizline",
+      "result_check": [
+        "code,EQ,'A00000'"
+      ],
+      "step_desc": "\u521b\u5efa\u5168\u90e8\u767b\u5f55\u7528\u6237\u4eba\u7fa4"
+    },
+    {
+      "before_script": false,
+      "script": null,
+      "output_var": [
+        {
+          "code_express": "groupId={data.groups[0].groupId}",
+          "type": "INNER"
+        }
+      ],
+      "request": {
+        "cookies": "",
+        "url": "message-platform/api/v1/receivergroups/list",
+        "request_type": "GET",
+        "host": "${feige_host}",
+        "params": "",
+        "content_type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "after_script": false,
+      "input": {
+        "feige_host": "http://test.feige.qiyi.domain:8080"
+      },
+      "step_id": "check_top_receiver_group",
+      "result_check": [
+        "code,EQ,'A00000'",
+        "data,NE,null",
+        "data.groups[0].name,EQ,biz_name"
+      ],
+      "step_desc": "\u68c0\u67e5\u6700\u9876\u90e8\u7684\u4eba\u7fa4\u540d\u5b57\u662f\u5426\u662f\u521a\u624d\u65b0\u5efa\u7684\u4eba\u7fa4"
+    },
+    {
+      "before_script": false,
+      "script": {
+        "before_test": null,
+        "after_test": {
+          "input": {
+            "param_name": "account",
+            "domain": "login",
+            "project_name": "feige"
+          },
+          "output": "username",
+          "func": "get_param_value_of_project",
+          "package": "util.get_exec_env"
+        }
+      },
+      "output_var": null,
+      "request": {
+        "cookies": "",
+        "url": "message-platform/api/v1/receivergroups/detail?groupId=${groupId}",
+        "request_type": "GET",
+        "host": "${feige_host}",
+        "params": "",
+        "content_type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "after_script": true,
+      "input": {
+        "feige_host": "http://test.feige.qiyi.domain:8080"
+      },
+      "step_id": "get_receiver_group_detail",
+      "result_check": [
+        "code,EQ,'A00000'",
+        "data,NE,null",
+        "data.bizLineName,EQ,'\u6d4b\u8bd5\u4e1a\u52a1\u7ebf'",
+        "data.creatorUid,EQ,username",
+        "data.filterType,EQ,'ACCOUNT'",
+        "data.createType,EQ,'CONDITION_FILTER'",
+        "data.groupStatus,EQ,0",
+        "data.name,EQ,biz_name"
+      ],
+      "step_desc": "\u83b7\u53d6\u4eba\u7fa4\u7684\u8be6\u60c5"
+    },
+    {
+      "before_script": false,
+      "script": {
+        "before_test": null,
+        "after_test": {
+          "input": {
+            "groupId": "${groupId}"
+          },
+          "output": null,
+          "func": "delete_reveiver_group_from_feigeDB",
+          "package": "lib.feige.feige_mysql_db"
+        }
+      },
+      "output_var": null,
+      "request": {
+        "cookies": "",
+        "url": "message-platform/api/v1/receivergroups/delete/TEST_BIZ",
+        "request_type": "POST",
+        "host": "${feige_host}",
+        "params": "groupId=${groupId}&bizLineId=TEST_BIZ",
+        "content_type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "after_script": true,
+      "input": {
+        "feige_host": "http://test.feige.qiyi.domain:8080"
+      },
+      "step_id": "delete_receiver_group",
+      "result_check": [
+        "code,EQ,'A00000'"
+      ],
+      "step_desc": "\u5220\u9664\u4eba\u7fa4"
+    },
+    {
+      "before_script": false,
+      "script": null,
+      "output_var": null,
+      "request": {
+        "cookies": "",
+        "url": "message-platform/api/v1/receivergroups/list",
+        "request_type": "GET",
+        "host": "${feige_host}",
+        "params": "",
+        "content_type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "after_script": false,
+      "input": {
+        "feige_host": "http://test.feige.qiyi.domain:8080"
+      },
+      "step_id": "check_top_receiver_group",
+      "result_check": [
+        "code,EQ,'A00000'",
+        "data,NE,null",
+        "data.groups[0].groupId,NE,groupId"
+      ],
+      "step_desc": "\u68c0\u67e5\u6700\u9876\u90e8\u7684\u4eba\u7fa4\u540d\u5b57\u662f\u5426\u662f\u521a\u624d\u65b0\u5efa\u7684\u4eba\u7fa4"
+    }
+  ],
+  "case_desc": "爱奇艺号首页相关需求",
+  "case_name": "p_iqiyihao_home_1"
+}
