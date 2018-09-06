@@ -1,22 +1,22 @@
 {
   "projects": [
     {
-      "id": "p_iqiyihao",
-      "pro_name": "爱奇艺号",
-      "pro_desc": "爱奇艺号",
+      "id": "p_project1",
+      "pro_name": "项目1",
+      "pro_desc": "项目1",
       "case_suits":[
         {
-          "suit_id": "p_iqiyihao_home",
+          "suit_id": "p_project1_home",
           "name": "首页",
-          "desc": "爱奇艺号首页相关需求"
+          "desc": "爱首页相关需求"
         },{
-          "suit_id": "p_iqiyihao_video",
+          "suit_id": "p_project1_video",
           "name": "视频",
-          "desc": "爱奇艺号视频相关需求"
+          "desc": "视频相关需求"
         },{
-          "suit_id": "p_iqiyihao_轻小说",
+          "suit_id": "p_project1_轻小说",
           "name": "轻小说",
-          "desc": "爱奇艺号轻小说相关需求"
+          "desc": "轻小说相关需求"
         }
       ]
     }

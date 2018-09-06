@@ -42,7 +42,7 @@ def add_new_proj():
         global_json = json.loads(json_string)
         has_repeat = False  #是否已添加
         for project in global_json['projects']:
-            if proj['id'] == project[id]:
+            if proj['id'] == project['id']:
                 has_repeat = True
                 break
         if not has_repeat:
@@ -80,7 +80,7 @@ def add_new_case_group_for_proj():
 
         isAdd = False  #是否已添加
         for proj in projs:
-            if proId == proj[id]:
+            if proId == proj['id']:
                 has_repeat = False
                 for suit in proj['case_suits']:
                     if suit['suit_id'] == case_suit['id']:
