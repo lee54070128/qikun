@@ -26,7 +26,7 @@
       },
       "after_script": false,
       "input": {
-        "feige_host": "http://test.feige.qiyi.domain:8080"
+        "feige_host": "http://test.feige.domain:8080"
       },
       "step_id": "get_all_bizline",
       "result_check": [
@@ -60,7 +60,7 @@
       },
       "after_script": false,
       "input": {
-        "feige_host": "http://test.feige.qiyi.domain:8080"
+        "feige_host": "http://test.feige.domain:8080"
       },
       "step_id": "check_receiver_group_name",
       "result_check": [
@@ -84,7 +84,7 @@
       },
       "after_script": false,
       "input": {
-        "feige_host": "http://test.feige.qiyi.domain:8080"
+        "feige_host": "http://test.feige.domain:8080"
       },
       "step_id": "create_new_login_bizline",
       "result_check": [
@@ -111,7 +111,7 @@
       },
       "after_script": false,
       "input": {
-        "feige_host": "http://test.feige.qiyi.domain:8080"
+        "feige_host": "http://test.feige.domain:8080"
       },
       "step_id": "check_top_receiver_group",
       "result_check": [
@@ -147,7 +147,7 @@
       },
       "after_script": true,
       "input": {
-        "feige_host": "http://test.feige.qiyi.domain:8080"
+        "feige_host": "http://test.feige.domain:8080"
       },
       "step_id": "get_receiver_group_detail",
       "result_check": [
@@ -186,7 +186,7 @@
       },
       "after_script": true,
       "input": {
-        "feige_host": "http://test.feige.qiyi.domain:8080"
+        "feige_host": "http://test.feige.domain:8080"
       },
       "step_id": "delete_receiver_group",
       "result_check": [
@@ -208,7 +208,7 @@
       },
       "after_script": false,
       "input": {
-        "feige_host": "http://test.feige.qiyi.domain:8080"
+        "feige_host": "http://test.feige.domain:8080"
       },
       "step_id": "check_top_receiver_group",
       "result_check": [
@@ -219,6 +219,6 @@
       "step_desc": "\u68c0\u67e5\u6700\u9876\u90e8\u7684\u4eba\u7fa4\u540d\u5b57\u662f\u5426\u662f\u521a\u624d\u65b0\u5efa\u7684\u4eba\u7fa4"
     }
   ],
-  "case_desc": "爱奇艺号首页相关需求",
-  "case_name": "p_iqiyihao_home_1"
+  "case_desc": "首页相关需求",
+  "case_name": "p_project1_home_1"
 }
