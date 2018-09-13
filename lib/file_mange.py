@@ -9,10 +9,10 @@ import os
 #读取json文件
 def get_json_file(path):
     if not path.endswith(".json"):
-        print "文件{}不是json文件".format(path)
-        return ''
+        print u"文件{}不是json文件".format(path)
+        return {}
     if not os.path.exists(path):
-        print "文件{}不存在".format(path)
+        print u"文件{}不存在".format(path)
         return None
 
     with open(path,'r+') as f:
@@ -20,7 +20,7 @@ def get_json_file(path):
         if json.loads(json_string):
             return json_string
         else:
-            print '读取的不是一个有效的json字符串！'
+            print u'读取的不是一个有效的json字符串！'
             return {}
 
 
@@ -30,7 +30,7 @@ def get_json_file(path):
 :is_cover 是否覆盖文件
 '''
 def write_str_into_file(path,str,is_cover=True):
-    print '正准备保存数据到{}中>>>>'.format(path)
+    print u'正准备保存数据到{}中>>>>'.format(path)
     try:
         if not os.path.exists(path) or not os.path.isfile(path):
             with open(path,'w') as f:  #如果文件不存在，必须以写的方式打开
@@ -60,10 +60,10 @@ def make_dir(path):
 #获取文件MDS值
 def get_file_md5(path):
     if not os.path.exists(path):
-        print '文件{}不存在'.format(path)
+        print u'文件{}不存在'.format(path)
         return None
     elif not os.path.isfile(path) :
-        print '文件{}不是一个文件'.format(path)
+        print u'文件{}不是一个文件'.format(path)
         return None
     try:
         myhash = hashlib.md5()
@@ -86,7 +86,7 @@ def get_file_md5(path):
 def get_file_paths_of_dir(file_list,dir_path):
     postfix = set(['xlsx','xls','json'])  # 设置要保存的文件格式
     if not os.path.isdir(dir_path):
-        print '{}不是一个目录路径'.format(dir_path)
+        print u'{}不是一个目录路径'.format(dir_path)
         return
     try:
         for file in os.listdir(dir_path):   #可以使用os.walk()方法来获取，但是需要用python3才可以
@@ -104,6 +104,6 @@ def get_file_paths_of_dir(file_list,dir_path):
 
 if __name__ == '__main__':
     path = os.getcwd()
-    print '当前工作目录为：%s' %path
+    print u'当前工作目录为：%s' %path
 
     print get_json_file('../config/global.json')
